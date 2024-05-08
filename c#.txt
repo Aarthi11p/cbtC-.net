@@ -1,0 +1,109 @@
+Introduction to C#
+    C# is pronounced as "C-Sharp". It is an object-oriented programming language provided by Microsoft that runs on .Net Framework.
+    
+    C# is widely used for developing a wide range of applications, including desktop applications, web applications, mobile apps, cloud services, and games.
+Functions
+    Function is a block of code that has a signature. Function is used to execute statements specified in the code block. A function consists of the following components:
+
+    Function name: It is a unique name that is used to make Function call.
+
+    Return type: It is used to specify the data type of function return value.
+
+    Body: It is a block that contains executable statements.
+
+    Access specifier: It is used to specify function accessibility in the application.
+
+    Parameters: It is a list of arguments that we can pass to the function during call.
+Arrays
+    using System;  
+public class ArrayExample  
+{  
+    public static void Main(string[] args)  
+    {  
+        int[] arr = new int[5]; 
+        arr[0] = 10;
+        arr[2] = 20;  
+        arr[4] = 30;  
+  
+        for (int i = 0; i < arr.Length; i++)  
+        {  
+            Console.WriteLine(arr[i]);  
+        }  
+    }  
+}  
+
+using System;  
+namespace AccessSpecifiers  
+{  
+    class PublicTest  
+    {  
+        public string name = "Shantosh Kumar";  
+        public void Msg(string msg)  
+        {  
+            Console.WriteLine("Hello " + msg);  
+        }  
+    }  
+    class Program  
+    {  
+        static void Main(string[] args)  
+        {  
+            PublicTest publicTest = new PublicTest();  
+            Console.WriteLine("Hello " + publicTest.name);  
+            publicTest.Msg("Peter Decosta");  
+        }  
+    }  
+}  
+
+
+    class ProtectedTest  
+    {  
+        protected string name = "Shashikant";  
+        protected void Msg(string msg)  
+        {  
+            Console.WriteLine("Hello " + msg);  
+        }  
+    }  
+    class Program  
+    {  
+        static void Main(string[] args)  
+        {  
+            ProtectedTest protectedTest = new ProtectedTest();  
+     
+            Console.WriteLine("Hello "+ protectedTest.name);  
+         
+            protectedTest.Msg("Swami Ayyer");  
+        }  
+    }  
+ 
+
+ using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+
+namespace FirstProgram
+{
+    class Program
+     {
+      public static void demo()
+     {
+       Console.WriteLine("Welcome to c# in dot net");
+      Console.ReadLine();
+      }
+     }
+    class Code:Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter your name");
+            string name = Console.ReadLine();
+            Console.WriteLine("Enter your age");
+            int age = int.Parse(Console.ReadLine());
+            Console.WriteLine("Name : " + name);
+            Console.WriteLine("Age : " + age);
+            Console.ReadLine();
+        }
+    }
+}

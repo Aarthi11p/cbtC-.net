@@ -1,0 +1,272 @@
+Inheritance
+   class Vehicle  
+{
+  public string brand = "Ford";  
+  public void honk()             
+  {                    
+    Console.WriteLine("Tuut, tuut!");
+  }
+}
+
+class Car : Vehicle  
+{
+  public string modelName = "Mustang";  
+}
+
+class Program
+{
+  static void Main(string[] args)
+  {
+    Car myCar = new Car();
+    myCar.honk();
+    Console.WriteLine(myCar.brand + " " + myCar.modelName);
+  }
+}
+
+Polymorphism
+class Animal   
+{
+  public virtual void animalSound() 
+  {
+    Console.WriteLine("The animal makes a sound");
+  }
+}
+
+class Pig : Animal  
+{
+  public override void animalSound() 
+  {
+    Console.WriteLine("The pig says: wee wee");
+  }
+}
+
+class Dog : Animal  
+{
+  public override void animalSound() 
+  {
+    Console.WriteLine("The dog says: bow wow");
+  }
+}
+
+class Program 
+{
+  static void Main(string[] args) 
+  {
+    Animal myAnimal = new Animal();  
+    Animal myPig = new Pig(); 
+    Animal myDog = new Dog();  
+
+    myAnimal.animalSound();
+    myPig.animalSound();
+    myDog.animalSound();
+  }
+}
+
+Constructor
+class Car
+{
+  public string model;
+  public string color;
+  public int year;
+  public Car(string modelName, string modelColor, int modelYear)
+  {
+    model = modelName;
+    color = modelColor;
+    year = modelYear;
+  }
+
+  static void Main(string[] args)
+  {
+    Car Ford = new Car("Mustang", "Red", 1969);
+    Console.WriteLine(Ford.color + " " + Ford.year + " " + Ford.model);
+  }
+}
+
+Methods
+AppendText()--	Appends text at the end of an existing file
+Copy()--	Copies a file
+Create()--	Creates or overwrites a file
+Delete()--	Deletes a file
+Exists()--	Tests whether the file exists
+ReadAllText()--	Reads the contents of a file
+Replace()--	Replaces the contents of a file with the contents of another file
+WriteAllText()--	Creates a new file and writes the contents to it. If the file already exist, it will be overridden
+
+.NET Framework Data Provider for SQL Server:
+   Data provider for SQL Server is a lightweight component. It provides better performance because it directly access SQL Server without any middle connectivity layer. In early versions, it interacts with ODBC layer before connecting to the SQL Server that created performance issues.
+
+   The .NET Framework Data Provider for SQL Server classes is located in the System.Data.SqlClient namespace. We can include this namespace in our C# application by using the following syntax.
+
+   ---using System.Data.SqlClient; ---  
+
+This namespace contains the following important classes.
+Class	
+SqlConnection--	It is used to create SQL Server connection. This class cannot be inherited.
+SqlCommand--	It is used to execute database queries. This class cannot be inherited.
+SqlDataAdapter--	It represents a set of data commands and a database connection that are used to fill the DataSet. This class cannot be inherited.
+SqlDataReader--	It is used to read rows from a SQL Server database. This class cannot be inherited.
+SqlException--	This class is used to throw SQL exceptions. It throws an exception when an error is occurred. This class cannot be inherited.
+
+Connecting sql Server with c# to create the table 
+using System;  
+using System.Data.SqlClient;  
+namespace AdoNetConsoleApplication  
+{  
+    class Program  
+    {  
+        static void Main(string[] args)  
+        {  
+            new Program().CreateTable();  
+        }  
+        public void CreateTable()  
+        {  
+            SqlConnection con = null;  
+            try  
+            {  
+                // Creating Connection  
+                con = new SqlConnection("data source=.; database=student; integrated security=SSPI");  
+                // writing sql query  
+                SqlCommand cm = new SqlCommand("create table student(id int not null,   
+                name varchar(100), email varchar(50), join_date date)", con);  
+                // Opening Connection  
+                con.Open();  
+                // Executing the SQL query  
+                cm.ExecuteNonQuery();  
+                // Displaying a message  
+                Console.WriteLine("Table created Successfully");  
+            }  
+            catch (Exception e)  
+            {  
+                Console.WriteLine("OOPs, something went wrong."+e);  
+            }  
+            // Closing the connection  
+            finally  
+            {  
+                con.Close();  
+            }  
+        }  
+    }  
+}  
+
+Inserting value into the table
+using System;  
+using System.Data.SqlClient;  
+namespace AdoNetConsoleApplication  
+{  
+    class Program  
+    {  
+        static void Main(string[] args)  
+        {  
+            new Program().CreateTable();  
+        }  
+        public void CreateTable()  
+        {  
+            SqlConnection con = null;  
+            try  
+            {  
+                // Creating Connection  
+                con = new SqlConnection("data source=.; database=student; integrated security=SSPI");  
+                // writing sql query  
+                SqlCommand cm = new SqlCommand("insert into student  
+                (id, name, email, join_date)values('101','Ronald Trump','ronald@example.com','1/12/2017')", con);  
+                // Opening Connection  
+                con.Open();  
+                // Executing the SQL query  
+                cm.ExecuteNonQuery();  
+                // Displaying a message  
+                Console.WriteLine("Record Inserted Successfully");  
+            }  
+            catch (Exception e)  
+            {  
+                Console.WriteLine("OOPs, something went wrong."+e);  
+            }  
+            // Closing the connection  
+            finally  
+            {  
+                con.Close();  
+            }  
+        }  
+    }  
+}  
+
+RETRIVE RECORDS
+using System;  
+using System.Data.SqlClient;  
+namespace AdoNetConsoleApplication  
+{  
+    class Program  
+    {  
+        static void Main(string[] args)  
+        {  
+            new Program().CreateTable();  
+        }  
+        public void CreateTable()  
+        {  
+            SqlConnection con = null;  
+            try  
+            {  
+                // Creating Connection  
+                con = new SqlConnection("data source=.; database=student; integrated security=SSPI");  
+                // writing sql query  
+                SqlCommand cm = new SqlCommand("Select * from student", con);  
+                // Opening Connection  
+                con.Open();  
+                // Executing the SQL query  
+                SqlDataReader sdr = cm.ExecuteReader();  
+                // Iterating Data  
+                while (sdr.Read())  
+                {  
+                    Console.WriteLine(sdr["id"] + " " + sdr["name"]+" "+sdr["email"]); // Displaying Record  
+                }  
+            }  
+            catch (Exception e)  
+            {  
+                Console.WriteLine("OOPs, something went wrong.\n"+e);  
+            }  
+            // Closing the connection  
+            finally  
+            {  
+                con.Close();  
+            }  
+        }  
+    }  
+}  
+
+DELETING THE RECORDS
+using System;  
+using System.Data.SqlClient;  
+namespace AdoNetConsoleApplication  
+{  
+    class Program  
+    {  
+        static void Main(string[] args)  
+        {  
+            new Program().CreateTable();  
+        }  
+        public void CreateTable()  
+        {  
+            SqlConnection con = null;  
+            try  
+            {  
+                // Creating Connection  
+                con = new SqlConnection("data source=.; database=student; integrated security=SSPI");  
+                // writing sql query  
+                SqlCommand cm = new SqlCommand("delete from student where id = '101'", con);  
+                // Opening Connection  
+                con.Open();  
+                // Executing the SQL query  
+                cm.ExecuteNonQuery();  
+                Console.WriteLine("Record Deleted Successfully");  
+            }  
+            catch (Exception e)  
+            {  
+                Console.WriteLine("OOPs, something went wrong.\n"+e);  
+            }  
+            // Closing the connection  
+            finally  
+            {  
+                con.Close();  
+            }  
+        }  
+    }  
+}  
